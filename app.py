@@ -19,61 +19,73 @@ st.set_page_config(page_title="Resume Matcher", layout="wide")
 # 2. Premium Minimalist CSS
 st.markdown("""
     <style>
+    /* Hide header/footer for clean app look */
+    header {visibility: hidden;}
     footer {visibility: hidden;}
     
     .block-container {
-        padding-top: 2.5rem;
+        padding-top: 2rem;
         padding-bottom: 2rem;
         max-width: 1200px;
     }
     
+    /* Premium Gradient Title */
     .gradient-title {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
         font-weight: 800;
         background: linear-gradient(90deg, #0ea5e9 0%, #10b981 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin-bottom: 0px;
         padding-bottom: 0px;
-        letter-spacing: -0.5px;
+        letter-spacing: -1px;
     }
     
-    /* Theme-agnostic inputs */
+    /* Dark Mode Inputs with Subtle Glow on Focus */
     .stTextArea textarea {
         border-radius: 8px;
-        border: 1px solid var(--secondary-background-color) !important;
-        background-color: var(--background-color) !important;
-        color: var(--text-color) !important;
+        border: 1px solid #27272a !important;
+        background-color: #09090b !important;
+        color: #fafafa !important;
         transition: all 0.3s ease;
     }
     .stTextArea textarea:focus {
         border-color: #0ea5e9 !important;
-        box-shadow: 0 0 0 1px rgba(14, 165, 233, 0.3);
+        box-shadow: 0 0 0 1px rgba(14, 165, 233, 0.4);
     }
     
+    /* Striking Solid Button */
     .stButton > button[kind="primary"] {
         border-radius: 6px;
         font-weight: 600;
         letter-spacing: 1px;
         text-transform: uppercase;
         font-size: 13px;
-        background: linear-gradient(90deg, #06b6d4 0%, #0ea5e9 100%);
+        background: linear-gradient(90deg, #0ea5e9 0%, #0284c7 100%);
         color: #ffffff;
         border: none;
         transition: all 0.3s ease;
-        box-shadow: 0 2px 10px rgba(6, 182, 212, 0.2);
+        box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
     }
     .stButton > button[kind="primary"]:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(6, 182, 212, 0.4);
+        box-shadow: 0 6px 16px rgba(14, 165, 233, 0.4);
+        background: linear-gradient(90deg, #0284c7 0%, #0369a1 100%);
     }
     
-    /* Dynamic Metric Color */
+    /* Giant Crisp Metric Score */
     [data-testid="stMetricValue"] {
-        font-size: 4rem !important;
+        font-size: 4.5rem !important;
         font-weight: 800 !important;
         letter-spacing: -2px;
-        color: var(--text-color) !important; 
+        color: #ffffff !important; 
+    }
+    
+    /* Minimalist File Uploader Text */
+    .stFileUploader {
+        border: 1px dashed #27272a;
+        border-radius: 8px;
+        background-color: #09090b;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -158,24 +170,24 @@ if analyze_clicked:
                     # Action Badges
                     if score >= 75:
                         badge_html = """
-                        <div style="border: 1px solid var(--secondary-background-color); border-left: 4px solid #10b981; background-color: var(--secondary-background-color); border-radius: 4px; padding: 16px; margin: 16px 0;">
-                            <h4 style="color: #10b981; margin: 0 0 4px 0; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Action: Should Apply</h4>
-                            <p style="color: var(--text-color); margin: 0; font-size: 14px;">High statistical match. Profile aligns strongly with core requirements.</p>
+                        <div style="border: 1px solid #064e3b; border-left: 4px solid #10b981; background-color: #022c22; border-radius: 6px; padding: 16px; margin: 16px 0;">
+                            <h4 style="color: #34d399; margin: 0 0 4px 0; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Action: Should Apply</h4>
+                            <p style="color: #d1d5db; margin: 0; font-size: 14px;">High statistical match. Profile aligns strongly with core requirements.</p>
                         </div>
                         """
                         st.balloons() 
                     elif score >= 55:
                         badge_html = """
-                        <div style="border: 1px solid var(--secondary-background-color); border-left: 4px solid #f59e0b; background-color: var(--secondary-background-color); border-radius: 4px; padding: 16px; margin: 16px 0;">
-                            <h4 style="color: #f59e0b; margin: 0 0 4px 0; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Action: Can Apply</h4>
-                            <p style="color: var(--text-color); margin: 0; font-size: 14px;">Moderate match. Be prepared to address specific technical gaps.</p>
+                        <div style="border: 1px solid #78350f; border-left: 4px solid #f59e0b; background-color: #451a03; border-radius: 6px; padding: 16px; margin: 16px 0;">
+                            <h4 style="color: #fbbf24; margin: 0 0 4px 0; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Action: Can Apply</h4>
+                            <p style="color: #d1d5db; margin: 0; font-size: 14px;">Moderate match. Be prepared to address specific technical gaps.</p>
                         </div>
                         """
                     else:
                         badge_html = """
-                        <div style="border: 1px solid var(--secondary-background-color); border-left: 4px solid #ef4444; background-color: var(--secondary-background-color); border-radius: 4px; padding: 16px; margin: 16px 0;">
-                            <h4 style="color: #ef4444; margin: 0 0 4px 0; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Action: Hold</h4>
-                            <p style="color: var(--text-color); margin: 0; font-size: 14px;">Low statistical match. Significant requirements missing.</p>
+                        <div style="border: 1px solid #7f1d1d; border-left: 4px solid #ef4444; background-color: #450a0a; border-radius: 6px; padding: 16px; margin: 16px 0;">
+                            <h4 style="color: #f87171; margin: 0 0 4px 0; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Action: Hold</h4>
+                            <p style="color: #d1d5db; margin: 0; font-size: 14px;">Low statistical match. Significant requirements missing.</p>
                         </div>
                         """
                     st.html(badge_html)
