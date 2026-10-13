@@ -215,6 +215,10 @@ if analyze_clicked:
                                 "Candidate Proficiency": "#0ea5e9" # Premium Cyan/Blue
                             }
                         )
+
+                        fig.update_traces(
+                            hovertemplate="<b>Skill:</b> %{y}<br><b>%{data.name}:</b> %{x}%<extra></extra>"
+                        )
                         
                         fig.update_layout(
                             height=chart_height,
