@@ -1,7 +1,9 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
 streamlit
 pdfplumber
 python-docx
 sentence-transformers
 scikit-learn
-torch torchvision --index-url https://download.pytorch.org/whl/cpu
 plotly
+torch
+torchvision
