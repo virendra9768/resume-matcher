@@ -19,9 +19,7 @@ st.set_page_config(page_title="Resume Matcher", layout="wide")
 # 2. Premium Minimalist CSS
 st.markdown("""
     <style>
-    #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
-    header {visibility: hidden;}
     
     .block-container {
         padding-top: 2.5rem;
