@@ -13,6 +13,10 @@ def load_matcher():
 
 compute_match_score = load_matcher()
 
+# Function to clear the Job Description text area
+def clear_jd_text():
+    st.session_state["jd_input"] = ""
+
 # 1. Page Configuration (No more target emoji)
 st.set_page_config(page_title="Resume Matcher", layout="wide")
 
@@ -98,16 +102,26 @@ st.markdown("<p style='color: #a1a1aa; font-size: 1.1rem; font-weight: 400; marg
 col1, col2 = st.columns(2, gap="large")
 
 with col1:
-    st.markdown("<h4 style='color: var(--text-color); font-weight: 600; font-size: 1.1rem;'>Job Description</h4>", unsafe_allow_html=True)
+    # Heading aur Clear button ko ek line mein dikhane ke liye sub-columns
+    h_col1, h_col2 = st.columns([4, 1])
+    
+    with h_col1:
+        st.markdown("<h4 style='color: #fafafa; font-weight: 600; font-size: 1.1rem;'>Job Description</h4>", unsafe_allow_html=True)
+    
+    with h_col2:
+        # Yeh ek secondary button hoga jo click karne par clear_jd_text function chalayega
+        st.button("Clear", on_click=clear_jd_text, use_container_width=True)
+        
     job_description = st.text_area(
         "Paste the target job description",
         height=250,
         placeholder="Paste job requirements here...",
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        key="jd_input"  # Yeh key lagana sabse zaroori hai taaki session_state kaam kare
     )
 
 with col2:
-    st.markdown("<h4 style='color: var(--text-color); font-weight: 600; font-size: 1.1rem;'>Your Resume</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='color: #fafafa; font-weight: 600; font-size: 1.1rem;'>Your Resume</h4>", unsafe_allow_html=True)
     uploaded_file = st.file_uploader(
         "Upload your latest resume", 
         type=["pdf", "docx", "txt"],
